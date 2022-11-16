@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raymond.Demo.API", "..\Raymond.Demo.API\Raymond.Demo.API.csproj", "{C7790B4D-03DF-4699-824E-16E30EC102BF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raymond.demo.Client", "SyncfusionBlazorApp4\Raymond.demo.Client.csproj", "{91AD0202-59CE-4085-B33D-124E7F2A3B72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raymond.Demo.API", "Raymond.Demo.API\Raymond.Demo.API.csproj", "{3A62CE59-6170-4758-A8C0-37A620DEABB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C7790B4D-03DF-4699-824E-16E30EC102BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7790B4D-03DF-4699-824E-16E30EC102BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7790B4D-03DF-4699-824E-16E30EC102BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7790B4D-03DF-4699-824E-16E30EC102BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91AD0202-59CE-4085-B33D-124E7F2A3B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91AD0202-59CE-4085-B33D-124E7F2A3B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91AD0202-59CE-4085-B33D-124E7F2A3B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91AD0202-59CE-4085-B33D-124E7F2A3B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A62CE59-6170-4758-A8C0-37A620DEABB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A62CE59-6170-4758-A8C0-37A620DEABB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A62CE59-6170-4758-A8C0-37A620DEABB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A62CE59-6170-4758-A8C0-37A620DEABB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
