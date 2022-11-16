@@ -1,0 +1,168 @@
+﻿@page "/datagrid-features"
+
+@using System.Net.Http;
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.Grids
+@using Raymond.demo.Client.model;
+@using System.Text;
+@using System.Net
+@using System.Diagnostics;
+@using System.Text.Json;
+@using System.Dynamic
+@inject HttpClient Http
+
+@inject IHttpClientFactory ClientFactory
+
+<h2>Customers</h2>
+<br/>
+<div style="padding-left:-80px;">
+
+
+    <SfGrid ID="Grid2" DataSource="@CustomersData" @ref="CustomerGrid" 
+        AllowPaging="true" AllowFiltering="true" AllowReordering="true"
+        AllowResizing="true" AllowGrouping="true" 
+        AllowSelection="true"
+            AllowSorting="true">
+        <GridPageSettings PageSize="10"></GridPageSettings>
+        @*<SfDataManager Url="http://localhost:5020/api/Customer" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>*@
+    <GridColumns>
+            <GridColumn Field=@nameof(CustomerData.id)
+                        TextAlign="TextAlign.Left" HeaderText="ID" Width="120"></GridColumn>
+
+                        <GridColumn Field=@nameof(CustomerData.companyName)
+                        TextAlign="TextAlign.Left" HeaderText="Company Name" Width="120"></GridColumn>
+
+                          <GridColumn Field=@nameof(CustomerData.contactName)
+                        TextAlign="TextAlign.Left" HeaderText="Contact Name" Width="120"></GridColumn>
+
+            <GridColumn Field=@nameof(CustomerData.contactTitle)
+                        TextAlign="TextAlign.Left" HeaderText="Contact Title" Width="120"></GridColumn>
+
+                        <GridColumn Field=@nameof(CustomerData.companyName)
+                        TextAlign="TextAlign.Left" HeaderText="CompanyName" Width="120"></GridColumn>
+
+            <GridColumn Field=@nameof(CustomerData.address)
+                        TextAlign="TextAlign.Left" HeaderText="Address" Width="120"></GridColumn>
+
+                        <GridColumn Field=@nameof(CustomerData.city)
+                        TextAlign="TextAlign.Left" HeaderText="City" Width="120"></GridColumn>
+
+                        <GridColumn Field=@nameof(CustomerData.fax)
+                        TextAlign="TextAlign.Left" HeaderText="Fax" Width="120"></GridColumn>
+
+            <GridColumn Field=@nameof(CustomerData.postalCode)
+                        TextAlign="TextAlign.Left" HeaderText="Postal Code" Width="120"></GridColumn>
+
+           @* <GridColumn Field=@nameof(CustomerData.country)
+                        TextAlign="TextAlign.Left" HeaderText="Country" Width="120"></GridColumn>
+
+            <GridColumn Field=@nameof(CustomerData.phone)
+                        TextAlign="TextAlign.Left" HeaderText="Phone" Width="120"></GridColumn>*@
+                         <GridColumn Field=@nameof(CustomerData.region)
+                        TextAlign="TextAlign.Left" HeaderText="Region" Width="120"></GridColumn>
+       
+    </GridColumns>
+</SfGrid>
+</div>
+<br/>
+<div>
+ @* <h3>Selected Features:</h3>
+    <ul class="ulstyle">
+      <li class="list"> Exporting - Excel Export</li>
+      <li class="list"> Grouping</li>
+      <li class="list"> Sorting</li>
+      <li class="list"> Filtering - Filter Bar</li>
+      <li class="list"> Selection</li>
+      <li class="list"> Reordering</li>
+      <li class="list"> Paging</li>
+      <li class="list"> Resizing</li>
+      <li class="list"> Searching</li>
+      <li class="list"> Checkbox Selection</li>
+      <li class="list"> Editing - Normal</li>
+      <li class="list"> Theme - Material</li>
+    </ul>*@
+</div>
+<br/>
+<style>
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+    .list {
+    float: left;
+    line-height: 20px;
+    margin: 10px;
+    min-width: 200px;
+    }
+</style>
+@code{
+    
+    public List<CustomerData>? CustomersData = new List<CustomerData>();
+       
+    SfGrid<CustomerData>? CustomerGrid;
+
+
+    protected override async void OnInitialized()
+    {
+        var client = new HttpClient();
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:5020/api/Customer");
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                var customerValues=Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
+                foreach (var inputAttribute in customerValues.results)
+                {
+                    if (inputAttribute.companyName != "" || inputAttribute.companyName != null){
+                        CustomerData cust = new CustomerData();
+                        cust.id = inputAttribute.id;
+                        cust.companyName = inputAttribute.companyName;
+                        cust.contactName = inputAttribute.contactName;
+                        cust.contactTitle = inputAttribute.contactTitle;
+                        cust.address = inputAttribute.address;
+                        cust.city = inputAttribute.city;
+                        cust.postalCode = inputAttribute.postalCode;
+                        cust.country = inputAttribute.country;
+                        cust.phone = inputAttribute.phone;
+                        cust.fax = inputAttribute.fax;
+                        cust.region = inputAttribute.region;
+                        CustomersData.Add(cust);
+                    }
+                }
+            }
+
+            else
+            {
+                Console.WriteLine("Error ret");
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Error ret");
+
+
+        }
+
+      
+
+      
+    }
+    
+    public class CustomerData
+    {
+        public string? id { get; set; }
+        public string? companyName { get; set; }
+        public string? contactName { get; set; }
+        public string? contactTitle { get; set; }
+        public string? address { get; set; }
+        public string? city { get; set; }
+        public string? postalCode { get; set; }
+        public string? country { get; set; }
+        public string? phone { get; set; }
+        public string? fax { get; set; }
+        public string? region { get; set; }
+    }
+}
